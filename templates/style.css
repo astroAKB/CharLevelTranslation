@@ -1,0 +1,121 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(to right, #e0f2fe, #f8fafc);
+    color: #1e293b;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* NAVBAR / TASKBAR */
+.navbar {
+    background-color: #1e40af;
+    padding: 1rem 2rem;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+/* MAIN CONTAINER */
+.container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+/* CARD BOX */
+.card {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+}
+
+/* HEADING */
+h1 {
+    font-size: 26px;
+    margin-bottom: 20px;
+    color: #1e40af;
+}
+
+/* TEXTAREA */
+textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    font-size: 16px;
+    margin-top: 10px;
+    resize: vertical;
+    transition: border 0.3s;
+}
+
+textarea:focus {
+    border-color: #2563eb;
+    outline: none;
+}
+
+/* BUTTON */
+button {
+    margin-top: 20px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #1d4ed8;
+}
+
+/* GENERATED TEXT */
+#generatedText {
+    margin-top: 25px;
+    font-size: 18px;
+    padding: 15px;
+    background-color: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    color: #0f172a;
+    word-wrap: break-word;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 768px) {
+    .card {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+
+
+

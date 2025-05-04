@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Character-Level Text Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar / Taskbar -->
+    <div class="navbar">🧠 Text Generator Pro</div>
+
+    <!-- Main UI -->
+    <div class="container">
+        <div class="card">
+            <h1>Generate Text Character-by-Character</h1>
+            <textarea id="inputText" rows="6" placeholder="Type some text here..."></textarea>
+            <button onclick="generateText()">Generate</button>
+            <div id="generatedText"></div>
+        </div>
+    </div>
+
+    <!-- JS Function -->
+    <script>
+        async function generateText() {
+            console.log("yes");
+            const inputText = document.getElementById("inputText").value;
+            const response = await fetch('/generate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ input_text: inputText })
+            });
+            const result = await response.json();
+            console.log(result);
+            document.getElementById("generatedText").textContent = result.generated_text;
+        }
+    </script>
+</body>
+</html>
+
+
