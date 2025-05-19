@@ -1,26 +1,22 @@
-import tensorflow as tf
-import pickle
+def sample(model, start_str, len_gen=500, max_input_len=40, scale_factor=1.0):
+    encoded_input = [char2int[s] for s in start_str]
+    encoded_input = tf.reshape(encoded_input, (1, -1))
 
-try:
-    with open('char2int.pkl', 'rb') as f:
-        char2int = pickle.load(f)
-    with open('int2char.pkl', 'rb') as f:
-        int2char = pickle.load(f)
-except FileNotFoundError:
-    print("Error: char2int.pkl or int2char.pkl not found. Make sure they are in the same directory or provide the correct path.")
+    generated = start_str
+    # model.reset_states()
+    
+    for i in range(len_gen):
+        logits = model(encoded_input)
+        logits = tf.squeeze(logits, 0)
 
+        scaled_logits = logits*scale_factor
+        new_char_idx = tf.random.categorical(scaled_logits, num_samples=1)
+        new_char_idx = tf.squeeze(new_char_idx)[-1].numpy()
 
-def Sample_text(model, start_string, length=500, temperature=0.5):
-    input_eval = [char2int[s] for s in start_string]
-    input_eval = tf.expand_dims(input_eval, 0)  # shape: (1, seq_length)
-    result = list(start_string)
+        generated += str(ch_array[new_char_idx])
 
-    for _ in range(length):
-        predictions = model(input_eval)  # shape: (1, vocab_size)
-        predictions = predictions / temperature
-        predicted_id = tf.random.categorical(tf.math.log(predictions), num_samples=1)[0, 0].numpy()
-
-        result.append(int2char[predicted_id])
-        input_eval = tf.expand_dims([predicted_id], 0)  # shape: (1, 1)
-
-    return ''.join(result)
+        new_char_idx = tf.expand_dims([new_char_idx], 0)
+        encoded_input = tf.concat([encoded_input, new_char_idx], axis=1)
+        encoded_input = encoded_input[:, -max_input_len:]
+    
+    return generated
